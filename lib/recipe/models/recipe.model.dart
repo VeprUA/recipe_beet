@@ -1,3 +1,6 @@
+import 'package:json_annotation/json_annotation.dart';
+
+@JsonSerializable()
 class Recipe {
   static const String tableName = 'recipes';
   final String id;
@@ -8,7 +11,7 @@ class Recipe {
   factory Recipe.fromMap(Map<String, dynamic> json) =>
       Recipe(id: json['id'], title: json['title']);
 
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> ToJS() {
     return {'id': id, 'title': title};
   }
 

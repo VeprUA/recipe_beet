@@ -17,8 +17,10 @@ Future<void> _createDB(db, version) async {
         CREATE TABLE recipes(id TEXT PRIMARY KEY, title TEXT);
         CREATE TABLE sections(
           id TEXT PRIMARY KEY,
-          title TEXT, content TEXT,
+          title TEXT,
+          content TEXT,
           recipe_id TEXT FOREIGN KEY,
+          type INTEGER,
           order INTEGER,
           FOREIGN KEY(recipe_id) REFERENCES recipes(id)
         );
