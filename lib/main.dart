@@ -3,14 +3,23 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:recipe_beet/recipe/providers/db.provider.dart';
 import 'package:recipe_beet/recipe/providers/recipe.provider.dart';
+import 'package:recipe_beet/recipe/providers/section.provider.dart';
 import 'package:recipe_beet/recipe/recipe_list.page.dart';
 import 'package:sqflite/sqflite.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // Create database
   final Database db = await initDb('data.db');
+
+  // Create Singletons
   final RecipeProvider rp = RecipeProvider();
+  final SectionProvider sp = SectionProvider();
+
+  // Inject Database reference
   rp.db = db;
+  sp.db = db;
+
   runApp(const MyApp());
 }
 

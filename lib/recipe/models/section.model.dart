@@ -1,12 +1,16 @@
 import 'package:json_annotation/json_annotation.dart';
 
-enum SectionType { text }
+part 'section.model.g.dart';
+
+enum SectionType { text, image }
 
 @JsonSerializable()
 class Section {
+  static const String tableName = 'sections';
   final String? id;
   final String? title;
   final String? content;
+  @JsonKey(name: 'recipe_id')
   final String recipeId;
   final SectionType type;
   final int order;
@@ -20,12 +24,8 @@ class Section {
     this.content,
   });
 
-  factory Section.fromMap(Map<String, dynamic> json) => Section(
-        id: json['id'],
-        recipeId: json['recipeId'],
-        type: json['type'],
-        order: json['order'],
-        content: json['content'],
-        title: json['title'],
-      );
+  factory Section.fromJson(Map<String, dynamic> json) =>
+      _$SectionFromJson(json);
+
+  Map<String, dynamic> toJson() => _$SectionToJson(this);
 }

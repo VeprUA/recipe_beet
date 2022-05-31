@@ -18,13 +18,13 @@ class RecipeProvider {
     final recipes = await _db!.query(Recipe.tableName, orderBy: 'title');
 
     List<Recipe> recipeList = recipes.isNotEmpty
-        ? recipes.map((r) => Recipe.fromMap(r)).toList()
+        ? recipes.map((r) => Recipe.fromJson(r)).toList()
         : [];
     return recipeList;
   }
 
   Future<int> add(Recipe recipe) async {
-    return await _db!.insert(Recipe.tableName, recipe.toMap());
+    return await _db!.insert(Recipe.tableName, recipe.toJson());
   }
 
   Future<Recipe> getRecipe(String id) async {
@@ -33,6 +33,6 @@ class RecipeProvider {
     if (recipeMapList.isEmpty) {
       throw Exception("Can't locate recipe");
     }
-    return Recipe.fromMap(recipeMapList[0]);
+    return Recipe.fromJson(recipeMapList[0]);
   }
 }
